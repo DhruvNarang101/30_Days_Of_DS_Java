@@ -1,0 +1,64 @@
+// Day 1 = Create the LinkedList. AddFirst and AddLast in the LinkedList. Print the LinkedList.
+
+import java.util.LinkedList;
+
+public class CreateLinkedList {
+
+    public static class Node {
+        int data;
+        Node next;
+
+        public Node (int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public static Node head;
+    public static Node tail;
+
+    // Add First in the Linked List O(1)
+    public void addFirst(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+        newNode.next = head;
+        head = newNode;
+    }
+    // Add Last in the Linked List O(1)
+    public void addLast(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+        tail.next = newNode;
+        tail = newNode;
+    }
+    // Print the Linked List O(n)
+    public void printLL(){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main (String args[]){
+        CreateLinkedList ll = new CreateLinkedList();
+        ll.printLL();
+        ll.addFirst(2);
+        ll.printLL();
+        ll.addFirst(1);
+        ll.printLL();
+        ll.addLast(3);
+        ll.printLL();
+        ll.addLast(4);
+        ll.printLL();
+        ll.addLast(5);
+        ll.printLL();
+    }
+}
