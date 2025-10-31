@@ -1,0 +1,88 @@
+public class AddMiddleLinkedList {
+
+    public class Node {
+        int data;
+        Node next;
+
+        public Node (int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public static Node head;
+    public static Node tail;
+    public static int size;
+
+    // Add First 
+    public void addFirst(int data){
+        Node newNode = new Node(data);
+        size++;
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Add Last 
+    public void addLast(int data){
+        Node newNode = new Node(data);
+        size++;
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+        tail.next = newNode;
+        tail = newNode;
+    }
+
+    // Add in the Middle 
+    public void addMiddle(int idx, int data){
+        if(idx == 0){
+            addFirst(data);
+            return;
+        }
+        if(head == null){
+            System.out.println("Linked List is empty");
+            return;
+        }
+        Node newNode = new Node(data);
+        size++;
+        Node temp = head;
+        int i = 0;
+        while( i< idx-1){
+            temp = temp.next;
+            i++;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+
+    // Print the LinkedList
+    public void printLL(){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data+ " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main (String args[]){
+        AddMiddleLinkedList ll = new AddMiddleLinkedList();
+        ll.addFirst(2);
+       // ll.printLL();
+        ll.addFirst(1);
+        //ll.printLL();
+        ll.addLast(3);
+        //ll.printLL();
+        ll.addLast(5);
+        //ll.printLL();
+        ll.addMiddle(3, 9);
+        ll.printLL();
+
+        System.out.print("Size of the LinkedList = "+size);
+    }
+}
