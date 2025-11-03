@@ -1,0 +1,104 @@
+// Day 5 Detect Cycle in LL and Remove Cycle in LL.
+
+public class DetectCycleInLinkedList {
+
+    public static class Node {
+        int data;
+        Node next;
+
+        public Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public static Node head;
+    public static Node tail;
+    public static int size;
+
+    // Add Last
+    public void addLast(int data){
+        Node newNode = new Node(data);
+        size++;
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+        tail.next = newNode;
+        tail = newNode;
+    }
+
+    // Print LinkedList
+    public static void printLinkedList(){
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data+ "->");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    // Detect a Cycle in the LinkedList
+    public static boolean detectCycle(){
+    Node slow = head;
+    Node fast = head;
+    while(fast != null && fast.next != null){
+        slow = slow.next;
+        fast = fast.next.next;
+        if(slow == fast){
+            return true;
+        }
+    }
+    return false;
+}
+
+// Remove a Cycle in a Linked List
+public static void removeCycle(){
+    boolean cycle = false;
+    Node slow = head;
+    Node fast = head;
+    while(fast != null && fast.next !=null){
+        slow = slow.next;
+        fast = fast.next.next;
+
+        if(slow == fast){
+            cycle = true;
+            break;
+        }
+    }
+
+        if(cycle == false){
+            return;
+        }
+
+    slow = head;
+    Node prev = null;
+    while (slow != fast) {
+        prev = fast;
+        slow = slow.next;
+        fast = fast.next;
+    }
+    prev.next = null;
+}
+
+
+    public static void main (String args[]){
+        //DetectCycleInLinkedList ll = new DetectCycleInLinkedList();
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
+        head.next.next.next.next.next = head.next; // 1->2->3->4->5->2
+        //ll.printLinkedList();
+        System.out.println("Detect the cycle in a LinkedList true for cycle or false for not cycle");
+        System.out.println(detectCycle());
+        //printLinkedList();
+        System.out.println("Remove the Cycle");
+        removeCycle();
+        //System.out.println(detectCycle());
+        printLinkedList();
+
+    }
+}
