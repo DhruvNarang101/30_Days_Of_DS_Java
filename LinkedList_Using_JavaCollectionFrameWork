@@ -1,0 +1,64 @@
+Day 6 LinkedList Using the JCF.
+
+import java.util.LinkedList;
+public class InbuildLinkedList {
+
+    public static void main (String args[]){
+        // Create 
+        LinkedList<Integer> ll = new LinkedList<>();
+
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.addFirst(0);
+
+        System.out.println(ll);
+
+        ll.removeFirst();
+        ll.removeLast();
+
+        System.out.println(ll);
+
+        ll.add(9); // It is add at the end.
+        System.out.println(ll);
+
+        ll.add(2, 10);
+        System.out.println(ll);
+
+        System.out.println(ll.get(5));
+
+        ll.set(2, 20); // Replaces the element at a specific index
+        System.out.println(ll);
+
+        ll.remove(2);
+        System.out.println(ll);
+        
+        ll.remove(Integer.valueOf(9));
+        System.out.println(ll);
+
+        ll.add(2, 20);
+        System.out.println(ll);
+
+        System.out.println(ll.contains(20));
+        System.out.println(ll.size());
+
+        // ll.clear();
+
+        System.out.println(ll);
+        System.out.println(ll.getFirst());
+        System.out.println(ll.getLast());
+        System.out.println(ll.getClass());
+
+        System.out.println(ll.peekFirst()); // Returns first element or null if empty
+        System.out.println(ll.peekLast()); // Returns last element or null if empty
+
+        System.out.println(ll.pollFirst());  // Removes and returns first element or null if empty
+        System.out.println(ll);
+
+        System.out.println(ll.pollLast());  // Removes and returns last element or null if empty
+        System.out.println(ll);
+        
+    }
+}
