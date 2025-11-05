@@ -1,0 +1,111 @@
+// Day 7 Print the Linked List in the zigzag form. Example 1->2-3->4->5->null (1->5->2->4->3->null)
+
+public class ZigZagLinkedList {
+
+    public class Node {
+        int data;
+        Node next;
+
+        public Node (int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public static Node head;
+    public static Node tail;
+    public static int size;
+
+    // Add First
+    public void addFirst(int data){
+        Node newNode = new Node(data);
+        size++;
+
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Add Last
+    public void addLast(int data){
+        Node newNode = new Node(data);
+        size++;
+
+        if(head == null){
+            head = tail = newNode;
+            return;
+        }
+
+        tail.next = newNode;
+        tail = newNode;
+    }
+
+    // Print LinkedList
+    public void printLL(){
+        Node temp = head;
+
+        while(temp!=null){
+            System.out.print(temp.data + "->");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    public Node getMid(Node head){
+        Node slow = head;
+        Node fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    // ZigZag Linked List 1->2->3->4->5 (1->5->2->4->3->null)
+    public void ZigZag(Node head){
+        Node mid = getMid(head); 
+
+        Node prev = null;
+        Node curr = mid.next;
+        Node next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        mid.next = null;
+
+        Node leftHead = head;
+        Node rightHead = prev;
+        Node nextL,nextR;
+
+        while (leftHead != null  && rightHead != null) {
+            nextL = leftHead.next;
+            leftHead.next = rightHead;
+            nextR = rightHead.next;
+            rightHead.next = nextL;
+            leftHead = nextL;
+            rightHead = nextR;
+        }
+    }
+
+    public static void main (String args[]){
+        ZigZagLinkedList ll = new ZigZagLinkedList();
+        ll.addFirst(2);
+        ll.addFirst(1);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+
+        ll.printLL();
+
+        ll.ZigZag(head);
+        ll.printLL();
+    }
+}
