@@ -1,0 +1,22 @@
+import java.util.Stack;
+
+public class ReverseStringUsingStack {
+    public static String reverseString(String str){
+        Stack<Character> s = new Stack<>();
+        int idx = 0;
+        while (idx < str.length()) {
+            s.push(str.charAt(idx));
+            idx++;
+        }
+        StringBuilder ans = new StringBuilder("");
+        while (!s.isEmpty()) {
+            char top = s.pop();
+            ans.append(top);
+        }
+        return ans.toString();
+    }
+    public static void main (String args[]){
+        String str = "Dhruv";
+        System.out.println(reverseString(str));
+    }
+}
