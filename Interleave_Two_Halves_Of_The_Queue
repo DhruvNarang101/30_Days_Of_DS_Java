@@ -1,0 +1,34 @@
+// Interleave two halves of the Queue.
+// for eg input 1 2 3 4 5 6 7 8 9 10 
+// output 1 6 2 7 3 8 4 9 5 10
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Interleave2HalvesQueue {
+    public static void interleave(Queue<Integer> originalQueue){
+        Queue<Integer> firstQueue = new LinkedList<>();
+        int n = originalQueue.size();
+        int firstQueueSize = n/2;
+        System.out.println("Size of the first Queue : "+firstQueueSize);
+        for(int i=0; i<firstQueueSize; i++){
+            firstQueue.add(originalQueue.remove());
+        }
+        while(!firstQueue.isEmpty()){
+            originalQueue.add(firstQueue.remove());
+            originalQueue.add(originalQueue.remove());
+        }
+    }
+
+    public static void main (String args[]){
+        Queue<Integer> originalQueue = new LinkedList<>();
+        for(int i=1; i<=10; i++){
+            originalQueue.add(i);
+        }
+        interleave(originalQueue);
+        while (!originalQueue.isEmpty()) {
+            System.out.print(originalQueue.peek()+" ");
+            originalQueue.remove();
+        }
+    }
+}
